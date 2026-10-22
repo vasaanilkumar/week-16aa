@@ -1,0 +1,153 @@
+AIM: Do the following using NS2 Simulator
+i. NS2 Simulator-Introduction
+ii. Simulate to Find the Number of Packets Dropped
+iii. Simulate to Find the Number of Packets Dropped by TCP/UDP
+iv. Simulate to Find the Number of Packets Dropped due to Congestion
+v. Simulate to Compare Data Rate& Throughput.
+Description:
+ i) NS2 Simulator-Introduction
+1.	NS2 stands for Network Simulator Version
+2.	It is an open-source event-driven simulator designed specifically for research in computer communication networks.
+Features of NS2
+1.	It is a discrete event simulator for networking
+2.	It provides substantial support to simulate bunch of protocols like TCP, FTP, UDP, https and
+3.	It simulates wired and wireless
+4.	Uses TCL as its scripting
+Network simulation is an important tool in developing, testing and evaluating network protocols. Simulation can be used without the target physical hardware, making it economical and practical for almost any scale of network topology and setup.
+GETTING STARTED
+Setting up the environment
+A user using the NCTUns in single machine mode, needs to do the following steps before he/she starts the GUI program:
+1.	Set up environment variables:
+Before the user can run up the dispatcher, coordinator, or NCTUns GUI program he/she must set up the NCTUNSHOME environment variable.
+2.	Start up the dispatcher on terminal
+3.	Start up the coordinator on terminal
+4.	Start up the nctunsclient on terminal
+After the above steps are followed, the starting screen of NCTUns disappears and the user is presented with the working window as shown below:
+
+
+ 
+
+ii) Simulate a three node point to point network with a duplex link between them. Set the queue size and vary the bandwidth and find the number of packets dropped.
+
+ 
+Step1: Drawing topology
+1.	Select/click the HOST icon on the toolbar and click the left mouse button on the editor, to place a HOST1 on the editor.
+Repeat the above procedure and place another host “HOST2” on the editor.
+2.	Select/click the HUB icon on the toolbar and click the left mouse button on the editor, to place HUB1 on the editor.
+3.	Click on the LINK icon on the toolbar and connect HOST1 to HUB1 and HUB1 toHOST2
+4.	Click on the “E” icon on the toolbar to save the current topology
+e.g: file1.tpl
+(Look for the ******.tpl extension.)
+NOTE: Changes cannot / (should not) be done after selecting the “E” icon.
+Step2: Configuration
+1.	Double click the left mouse button while cursor is on HOST1 to open the
+2.	Select Add button on the HOST window to invoke the command window and provide the following command in the command textbox.
+stg –u 1024 100 1.0.1.2
+3.	Click OK button on the command window to exit and once again click on the OK button on the HOST window to exit.
+4.	Double click the left mouse button while cursor is on HOST2 to open the
+5.	Select Add button on the HOST window to invoke the command window and provide the following command in the command textbox.
+rtg –u –w log1
+6.	Click OK button on the command window to
+7.	Click NODE EDITOR Button on the HOST window and select the MAC tab from the modal window that pops up.
+8.	Select LOG STATISTICS and select checkboxes for Number of Drop Packet and Number of Collisions in the MAC window
+9.	Click OK button on the MAC window to exit and once again click on the OK button on the HOST window to exit.
+Note: To set QUEUE size
+1.	Double click the left mouse button while cursor is on HOST2 to open the
+2.	Click NODE EDITOR Button on the HOST window and select the FIFO tab from the modal window that pops up.
+3.	Change Queue size (Default 50).
+4.	Click OK button on the FIFO window to exit and once again click on the OK button on the HOST window to exit.
+Step3: Simulate
+1.	Click “R” icon on the tool bar
+2.	Select Simulation in the menu bar and click/ select RUN in the drop down list to execute the simulation.
+•	venTo start playback select “►” icon located at the bottom right corner of the
+1.	To view results, Open up new TERMINAL window, move to file1.resultsfolder and open collision and drop log files in separate TERMINAL window.
+Changing configurations Change 1
+1.	Open the above file,
+2.	Do not change the topology or any other configuration,
+3.	Select E icon on the toolbar
+4.	Reduce the bandwidth at link2 by double clicking the left mouse button while cursor is on link2 .(Change bandwidth on both tabs Uplink/Downlink)
+5.	Repeat Step3 (Simulate)
+Change 2
+1.	Open the above file,
+2.	Remove HUB and replace it with
+3.	Do not change anything in the configuration
+4.	Repeat Step3(Simulate)
+
+
+iii) Simulate a four node point to point network and connect the link as follows Apply a TCP agent between n0 to n3 and apply a UDP agent between n1 and Apply relevant applications over TCP and UDP agents changing the parameters and determine the number of packets sent by two agents.
+
+ 
+
+
+Step1: Drawing topology
+1.	Select/click the HOST icon on the toolbar and click the left mouse button on the editor, to place a host on the editor.
+Repeat the above procedure and place two other hosts “HOST2” and“HOST3” on the editor.
+2.	Select/click the HUB (or SWITCH) icon on the toolbar and click the left mouse button on the editor, to place a HUB (or SWITCH) on the editor.
+3.	Click on the LINK icon on the toolbar and connect HOST1 to HUB, HOST2 to HUB and HUB to HOST3
+4.	Click on the “E” icon on the toolbar to save the current topology g: file2.tpl(Look for the ******.tpl extension.)
+NOTE: Changes cannot / (should not) be done after selecting the “E” icon.
+Step2: Configuration
+1.	Double click the left mouse button while cursor is on HOST1 to open the
+2.	Change simulation time from 0 to 20 for HOST1
+3.	Select Add button on the HOST1 window to invoke the command window and provide the following command in the command textbox.
+ttcp –t –u –s –p 8000 1.0.1.3
+4.	Click OK button on the command window to exit
+5.	Click NODE EDITOR Button on the HOST window and select the MAC tab from the modal window that pops up.
+6.	Select LOG STATISTICS and select checkbox for output throughput in the MAC window
+7.	Click OK button on the MAC window to exit and once again click on the OK button on the HOST window to exit.
+8.	Double click the left mouse button while cursor is on HOST2 to open the
+9.	Change simulation time from 21 to 40 for HOST2
+10.	Select Add button on the HOST2 window to invoke the command window and provide the following command in the command textbox.
+stg –u 1024 100 1.0.1.3
+11.	Click OK button on the command window to exit
+12.	Click NODE EDITOR Button on the HOST window and select the MAC tab from the modal window that pops up.
+13.	Select LOG STATISTICS and select checkbox for output throughput in the MAC window
+14.	Click OK button on the MAC window to exit and once again click on the OK button on the HOST window to exit.
+15.	Double click the left mouse button while cursor is on HOST3 to open the
+16.	Change simulation time from 0 to 20 for HOST3
+17.	Select Add button on the HOST window to invoke the command window and provide the following command in the command textbox.
+ttcp –r –u –s –p 8000
+18.	Click OK button on the command window to
+19.	Change simulation time from 21 to 40 for HOST3
+20.	Also add the following command on HOST3 rtg –u –
+w log1
+21.	Click NODE EDITOR Button on the HOST window and select the MAC tab fromthe modal window that pops up.
+22.	Select LOG STATISTICS and select checkbox for input and output throughput in the MAC window
+23.	Click OK button on the MAC window to exit and once again click on the OK button on the HOST window to exit.
+Step3: Simulate
+1.	Click “R” icon on the tool bar
+2.	Select Simulation in the menu bar and click/ select RUN in the drop down list to execute the simulation.
+•	To start playback select “►” icon located at the bottom right corner of the
+2.	To view results, Open up new TERMINAL window, move to file2.resultsfolder and open input and output throughput log files in separate TERMINAL
+
+Iv) Simulate the transmission of ping messages over a network topology consisting of 6 nodes and find the number of packets dropped due to congestion.
+ 
+Step1: Drawing topology
+1.	Select/click the SUBNET icon on the toolbar and click the left mouse button on the editor, to place a SUBNET on the editor.
+2.	A pop up window appears requesting the number of nodes and radius for the subnet
+Set number of nodes=6; Set radius of subnet >150
+3.	Click on the “E” icon on the toolbar to save the current topology g: file4.tpl(Look for the ******.tpl extension.)
+NOTE: Changes cannot / (should not) be done after selecting the “E” icon.
+Step2: Configuration
+1.	Make 5 HOST as sender and make 1 HOST as receiver and give the commands with particular port number
+2.	Sender Commands
+Sender 1 : stcp –p 21 –l 1024 1.0.1.1
+Sender 2 : stcp –p 22 –l 1024 1.0.1.1
+Sender 3 : stcp –p 23 –l 1024 1.0.1.1
+Sender 4 : stcp –p 24 –l 1024 1.0.1.1
+Sender 5 : stcp –p 25 –l 1024 1.0.1.1
+Receiver Commands
+rtcp –p 21 –l 1024
+rtcp –p 22 –l 1024
+rtcp –p 23 –l 1024
+rtcp –p 24 –l 1024
+rtcp –p 25 –l 1024
+3.	For each sender HOST select the Out through put, Collision and Drop
+4.	For receiver HOST select the In through tput, Collision and Drop
+Step3: Simulate
+1.	Click “R” icon on the tool bar
+2.	Select Simulation in the menu bar and click/ select RUN in the dropdown list to execute the simulation.
+•	During simulation, double click the mouse button on any sender HOST, the HOST window pops up, select / click on command console button located at the bottom.
+1.	A terminal window appears, type ping IP address of a receiver HOST in the subnet atthe command prompt.
+2.	To view results, Open up new TERMINAL window, move to results folder and open drop and collision log files in separate TERMINAL window.
+
